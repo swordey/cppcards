@@ -1,0 +1,53 @@
+{% extends 'template.html' %}
+{% block head %}
+<style>
+.text {
+    width:70%;
+    margin-left:auto;
+    margin-right:auto;
+    font-size: 18px;
+}
+</style>
+{% endblock %}
+{% block pagetitle %}
+<h1><center>Welcome to C++ Learning Cards Portal</center></h1>
+{% endblock %}
+{% block content %}
+<div class="text">
+    <p>On this portal, you can test out your C++ knowledge in different areas, or just practice. In this portal you will
+    find usual C++ interview questions with code, where you have to guess what will be the output. The questions are
+    separated into several groups, so you can only test or practice certain areas.</p>
+    <p>How to use:</p>
+    <ul>
+      <li>Each code snippet has a question, which is likely to summarize the important fact, that the code snippet needs.
+      So during practice, you may only need the question to remember an important C++ fact.</li>
+      <li>Below the question, you can see the code snippet.</li>
+      <li>You have to guess what will be the output.</li>
+      <li>If you want to see the result, click on the code, that will turn the card around, showing some comments on the code
+      and showing the output.</li>
+      <li>Some codes will lead to compile error, or runtime error, these will be indicated in the output, or in the comments.</li>
+    </ul>
+    <p>If you see any error, or find a better question for a certain code, or have a great C++ coding interview question
+        just contact me on <a href="https://www.linkedin.com/in/tamas-kardos/">LinkedIn</a>.</p>
+</div>
+{% endblock %}
+
+<script>
+
+/* Card flip*/
+var coll = document.getElementsByClassName("flip-card");
+var i;
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    var content = this.nextElementSibling;
+    if(this.children[0].style.transform == "")
+    {
+        this.children[0].style.transform="rotateY(180deg)";
+        this.nextElementSibling.style.display="block";
+    }else{
+        this.children[0].style.transform="";
+        this.nextElementSibling.style.display="none";
+    }
+  });
+}
+</script>

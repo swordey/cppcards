@@ -1,0 +1,170 @@
+{% extends 'template.html' %}
+{% block head %}
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+
+<link class="codestyle" rel="stylesheet" href="/static/css/monokai-sublime.css">
+<link rel="stylesheet" href="/static/css/main2.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+<style>
+.base {
+  width: 60%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  margin-bottom:50px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card-front, .flip-card-back {
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #23241f;
+  color: #f92672;
+}
+
+.flip-card-back {
+  background-color: #23241f;
+  color: #f92672;
+  transform: rotateY(180deg);
+}
+
+.front {
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+
+.code {
+    margin:0;
+    background-color:#23241f;
+    font-size:12px;
+}
+
+.content {
+    display:none;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top:-40px;
+}
+
+.no-padding {
+    padding:0;
+}
+
+@media only screen and (max-width: 1300px) {
+    .base {
+        width:80%
+    }
+}
+
+/**********************/
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+.question {
+    background-color:#23241f;
+    text-align:center;
+    color:#a6e22e;
+    padding-bottom:10px;
+    padding-top:10px;
+    font-size: 20px;
+}
+
+.card-container {
+    margin-bottom:50px;
+    margin-top:50px;
+}
+
+</style>
+{% endblock %}
+
+{% block pagetitle %}
+<h1><center>{{selected_group.capitalize()}} C++ Questions</center></h1>
+{% endblock %}
+
+{% block content %}
+
+{% for elem in datas %}
+<div class="card-container">
+<div class="base question">
+    {{elem.question}}
+</div>
+<div class="flip-card base">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <!--<div><b><font size="5">Code:</font></b></div>-->
+            <pre class="code front"><code class="hljs cpp">
+{{elem.code}}
+                </code></pre>
+        </div>
+        <div class="flip-card-back">
+            <!--<div><b><font size="5">Commented Code:</font></b></div>-->
+            <pre class="code"><code  class="hljs cpp">
+{{elem.commented_code}}
+                </code></pre>
+        </div>
+    </div>
+</div>
+{% if elem.output != "" %}
+<div class="content base">
+    <pre class="code"><code class="hljs cpp no-padding">
+{{elem.output}}
+    </code></pre>
+</div>
+{% endif %}
+</div>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+/* Card flip*/
+var coll = document.getElementsByClassName("flip-card");
+var i;
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    var content = this.nextElementSibling;
+    if(this.children[0].style.transform == "")
+    {
+        this.children[0].style.transform="rotateY(180deg)";
+        this.nextElementSibling.style.display="block";
+    }else{
+        this.children[0].style.transform="";
+        this.nextElementSibling.style.display="none";
+    }
+  });
+}
+</script>
+{% endblock %}
