@@ -1,5 +1,5 @@
-from app import app
 from flask import render_template
+from app import app
 import sqlite3
 
 
@@ -11,7 +11,7 @@ def dict_factory(cursor, row):
 
 @app.route('/')
 def main():
-    with sqlite3.connect("db.db") as conn:
+    with sqlite3.connect("app/db.db") as conn:
         conn.row_factory = dict_factory
         c = conn.cursor()
 
@@ -32,7 +32,7 @@ def main():
 
 @app.route('/<group>')
 def mobil(group):
-    with sqlite3.connect("db.db") as conn:
+    with sqlite3.connect("app/db.db") as conn:
         conn.row_factory = dict_factory
         c = conn.cursor()
 
