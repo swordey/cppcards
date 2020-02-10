@@ -1,7 +1,6 @@
-from flask import Flask, render_template
+from app import app
+from flask import render_template
 import sqlite3
-
-app = Flask(__name__)
 
 
 def dict_factory(cursor, row):
@@ -9,7 +8,6 @@ def dict_factory(cursor, row):
     for idx, col in enumerate(cursor.description):
         d[col[0]] = row[idx]
     return d
-
 
 @app.route('/')
 def main():
