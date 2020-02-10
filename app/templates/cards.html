@@ -52,6 +52,9 @@
     height:100%;
 }
 
+.back {
+}
+
 .code {
     margin:0;
     background-color:#23241f;
@@ -128,7 +131,7 @@
         </div>
         <div class="flip-card-back">
             <!--<div><b><font size="5">Commented Code:</font></b></div>-->
-            <pre class="code"><code  class="hljs cpp">
+            <pre class="code back"><code  class="hljs cpp">
 {{elem.commented_code}}
                 </code></pre>
         </div>
@@ -155,12 +158,15 @@ var i;
 for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     var content = this.nextElementSibling;
+    console.log(this.children[0]);
     if(this.children[0].style.transform == "")
     {
         this.children[0].style.transform="rotateY(180deg)";
+        this.children[0].children[0].childNodes[3].childNodes[0].style.overflow="hidden";
         this.nextElementSibling.style.display="block";
     }else{
         this.children[0].style.transform="";
+        this.children[0].children[0].childNodes[3].childNodes[0].style.overflow="";
         this.nextElementSibling.style.display="none";
     }
   });
